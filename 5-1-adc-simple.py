@@ -10,16 +10,31 @@ def from_10_to_2_dac (val):
     return signal 
 
 def adc (): 
-    compValue = GPIO.input (comp)
-    return compValue
 
-maxVoltage = 3.3
+    compvalue = 0
+
+    for Value in range(256):
+
+        GPIO.output(dac, dec2bin(value))
+        
+        time.sleep(0.005)
+
+        compsignal = GPIO.input(comp)
+
+        if compsignal == 0:
+
+            compvalue = value
+            break
+    
+    return compvalue
+
 
 dac = [26, 19, 13, 6, 5, 11, 9, 10]
 
+
 comp = 4
 troyka = 17
-maxVoltage = 3.3
+maxV = 3.3
 levels = 256
 
 GPIO.setmode(GPIO.BCM)
@@ -33,18 +48,13 @@ GPIO.setup(comp, GPIO.IN)
 try:
     while True:
 
-        for value in range (256): 
-            signal = from_10_to_2_dac(value)
-            compVal = adc ()
-            V = value / levels * maxVoltage 
-    
+        compValue = adc()
+        binV = dec2bin(compValue)
 
-            if (compVal == 0):
-                print("Значение:", value, "Бинарный код значения:", signal,"Напряжение:", V)
-                break
+        V = compValue / levels * maxV
 
-            time.sleep (0.005)
+        print("Значени:", compValue, "Бинарный код:", binV, "Напряжение:", V)
 
 finally:
-    GPIO.output(dac,GPIO.LOW)
+    GPIO.output(dac, GPIO.LOW)
     GPIO.cleanup()

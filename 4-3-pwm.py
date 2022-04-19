@@ -8,8 +8,14 @@ try:
     p.start(0) # коэффициент заполнения импульса = 0
 
     while True:
-        print("Введи коэффициент duty cycle:")
-        dutycycle = int(input())
+        
+        dutycycle = input("Введи коэффициент duty cycle (exit - выход): ") 
+
+        if dutycycle == "exit":
+            exit()
+
+        dutycycle = int(dutycycle)
+        
         p.start(dutycycle)
 
 finally:

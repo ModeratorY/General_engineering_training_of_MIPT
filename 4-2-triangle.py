@@ -16,12 +16,12 @@ try:
     while True:
         for i in range (0, 255, 1):
             GPIO.output(dac, dec2bin(i))
-            time.sleep(period / 256)
+            time.sleep(period / 512)
         
         for i in range (255, 0, -1):
             GPIO.output(dac, dec2bin(i))
-            time.sleep(period / 256)
+            time.sleep(period / 512)
 
 finally: 
-    GPIO.output(dac,0)
+    GPIO.output(dac, 0)
     GPIO.cleanup()

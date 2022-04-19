@@ -13,8 +13,6 @@ def adc ():
     compValue = GPIO.input (comp)
     return compValue
 
-maxV = 3.3
-
 dac = [26, 19, 13, 6, 5, 11, 9, 10]
 
 comp = 4
@@ -49,8 +47,8 @@ try:
             if (compVal == 0):
                 value -= 2 ** (7 - n)
 
-        print("Значение:", value, "Бинарный код значения:", signal,"Напряжение:", V)
+        print("Значение:", value, "Бинарный код:", signal,"Напряжение:", V)
 
 finally:
-    GPIO.output(dac,GPIO.LOW)
+    GPIO.output(dac, GPIO.LOW)
     GPIO.cleanup()

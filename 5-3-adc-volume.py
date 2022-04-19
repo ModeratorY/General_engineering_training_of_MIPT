@@ -36,8 +36,6 @@ def adc ():
 
     return dec
 
-maxV = 3.3
-
 dac = [26, 19, 13, 6, 5, 11, 9, 10]
 
 comp = 4
@@ -52,7 +50,6 @@ GPIO.setup(comp, GPIO.IN)
 leds = [21, 20, 16, 12, 7, 8, 25, 24]
 
 GPIO.setup(leds, GPIO.OUT)
-
 
 def ledsFunc(V):
 
@@ -74,5 +71,5 @@ try:
         ledsFunc(V)
 
 finally:
-    GPIO.output(dac,GPIO.LOW)
+    GPIO.output(dac, GPIO.LOW)
     GPIO.cleanup()

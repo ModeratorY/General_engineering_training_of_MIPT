@@ -1,4 +1,3 @@
-from ast import Break
 import RPi.GPIO as GPIO
 
 def decimal2binary (value):
@@ -18,14 +17,10 @@ try:
 
         if number == exit: exit()
 
-        if type(number) != float:
-            print ("Это не число")
+        if number.isdigit() != 1:
+            print("Это не целое число или оно отрицательное!")
             exit()
-        
-        if not type(number) != int:
-            print("Это не целое число")
-            exit()
-
+            
         number = int(number)
 
         if (number > 255) or (number < 0):
