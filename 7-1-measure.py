@@ -2,7 +2,6 @@ import RPi.GPIO as GPIO
 import time
 import matplotlib.pyplot as plt
 
-
 dac = [26, 19, 13, 6, 5, 11, 9, 10]
 leds = [21, 20, 16, 12, 7, 8, 25, 24]
 comp = 4
@@ -54,7 +53,7 @@ try:
     
     val = 0
 
-    while(val <= 255 * 0.97): # пока конденсатор не заряжен почти до конца
+    while(val <= 255 * 0.98): # пока конденсатор не заряжен почти до конца
         
         val = adc()
         data.append(val)
@@ -70,7 +69,7 @@ try:
 
     val = 255
 
-    while(val >= 255 * 0.02): # пока конденсатор не разряжен почти до конца
+    while(val >= 255 * 0.05): # пока конденсатор не разряжен почти до конца
 
         val = adc()
         data.append(val)
@@ -95,11 +94,7 @@ data_str = [str(item) for item in data] # список всех значение
 with open("7-1-data.txt", "w") as outfile:
     outfile.write("\n".join(data_str))
 
-with open("7-1-settings.txt", "w") as outfile:
-    outfile.write("Частота дискретизации:", len(data) / Finish_Time, "Hz") 
-    outfile.write("Шаг квантования АЦП: {:.4f}", format(3.3 / 256), "V")
-
 print("Общая продолжительность эксперимента:", Finish_Time, "c")
 print("Период одного измерения:", Finish_Time / len(data), "c")  # ?????????????
 print("Частота дискретизации:", len(data) / Finish_Time, "Hz")   # ?????????????
-print("Шаг квантования АЦП: {:.4f}", format(3.3 / 256), "V")
+print("Шаг квантования АЦП:", format(3.3 / 256), "V")
