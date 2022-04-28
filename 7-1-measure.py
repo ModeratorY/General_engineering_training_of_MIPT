@@ -94,7 +94,12 @@ data_str = [str(item) for item in data] # список всех значение
 with open("7-1-data.txt", "w") as outfile:
     outfile.write("\n".join(data_str))
 
-print("Общая продолжительность эксперимента:", Finish_Time, "c")
-print("Период одного измерения:", Finish_Time / len(data), "c")  # ?????????????
-print("Частота дискретизации:", len(data) / Finish_Time, "Hz")   # ?????????????
-print("Шаг квантования АЦП:", format(3.3 / 256), "V")
+with open("7-1-settings.txt", "w") as f:
+    f.write("{:.4f}".format(Finish_Time / len(data)))
+    f.write("\n")
+    f.write("Шаг квантования АЦП: {:.3f}".format(3.3 / 256))
+
+print("Общая продолжительность эксперимента: {:.2f}".format(Finish_Time), "c")
+print("Период одного измерения: {:.4f}".format(Finish_Time / len(data)), "c")  
+print("Частота дискретизации: {:.2f}".format(len(data) / Finish_Time), "Hz")   
+print("Шаг квантования АЦП: {:.3f}".format(3.3 / 256), "V")
